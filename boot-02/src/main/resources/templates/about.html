@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi Siamo</title>
+</head>
+<body>
+    <h1>Sei nella sezione Chi Siamo</h1>
+    <a th:href="@{/(nome=${nome})}">Torna In Home Page</a>
+    <div th:if="${eta >= 18}">
+        <p>Area riservata ai maggiorenni</p>
+    </div>
+</body>
+</html>

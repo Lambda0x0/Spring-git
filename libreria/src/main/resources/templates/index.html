@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+    <div>
+        <a th:href="@{/loginutente}">Accesso Area Utente</a>
+        <a th:href="@{/registrazioneutente}">Registrazione Utente</a>
+        <a th:href="@{/admincategorie}">Gestione Categorie</a>
+        <a th:href="@{/adminlibri}">Gestione Libri</a>
+    </div>
+    <table>
+        <tr th:each="libro : ${libri}">
+            <td th:text="${libro.titolo}">Titolo Libro</td>
+            <td th:text="${#numbers.formatDecimal(libro.prezzo, 0, 'POINT', 2, 'COMMA')}">Prezzo Libro</td>
+            <td th:text="${libro.categoria.descrizione}">Descrizione Categoria</td>
+            <td th:text="${libro.autore.nome} + ' ' + ${libro.autore.cognome}">Nome e Cognome Autore</td>
+            <td>
+                <a th:href="@{/dettaglio(id=${libro.id})}">Dettaglio</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titolo}">Home Page</title>
+    <link th:href="@{style.css}" rel="stylesheet">
+</head>
+<body>
+    <h1>Benvenuto in Home Page</h1>
+    <h2 th:text="'Ti trovi nella pagina iniziale'"></h2>
+    <h3 th:text="'Il tuo nome è ' + ${nome} + ' ciao ciao'"></h3>
+    <img th:src="@{image.png}" alt="Immagine di prova">
+    <a th:href="@{/about(nome=${nome},eta=${eta})}">Vai a Chi Siamo</a>
+</body>
+</html>

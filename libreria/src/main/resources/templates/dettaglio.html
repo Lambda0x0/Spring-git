@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dettaglio Libro</title>
+</head>
+<body>
+    <a th:href="@{/}">Torna a Catalogo</a>
+    <h2 th:text="${libro.titolo}">Titolo Libro</h2>
+    <h3 th:text="${#numbers.formatDecimal(libro.prezzo, 0, 'POINT', 2, 'COMMA')}">Prezzo Libro</h3>
+    <ul>
+        <li th:text="${libro.categoria.descrizione}">Descrizione Categoria</li>
+        <li th:text="${libro.autore.nome} + ' ' + ${libro.autore.cognome}">Nome e Cognome Autore</li>
+    </ul>
+    <a th:href="@{/dettaglio/aggiungi(id=${libro.id})}">Aggiungi al Carrello</a>
+    <p th:if="${add != null}"
+        th:text="${add.equals('y') ? 'Libro Aggiunto' : 'Libro Già Presente'}"
+        th:style="${add.equals('y') ? 'color:green' : 'color:red'}"></p>
+</body>
+</html>

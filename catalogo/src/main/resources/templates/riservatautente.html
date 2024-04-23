@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Area Riservata Utente</title>
+</head>
+<body>
+<h2>Area Riservata Utente</h2>
+<h3>Benvenuto, <span th:text="${utente.profilo.username}"></span>!</h3>
+<h4>Carrello:</h4>
+<ul>
+    <li th:each="articolo : ${carrello}">
+        <span th:text="${articolo.modello}"></span> - <span th:text="${articolo.prezzo}"></span>€
+        <a th:href="@{/riservatautente/rimuovi(id=${articolo.id})}">(Rimuovi)</a>
+    </li>
+</ul>
+<p>Totale: <span th:text="${totale}"></span>€</p>
+<a href="/">Torna alla Home Page</a>
+</body>
+</html>

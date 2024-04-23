@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Area Utente</title>
+</head>
+<body>
+    <div>
+        <a th:href="@{/}">Torna in Home Page</a>
+        <a th:href="@{/riservatautente/logout}">Logout</a>
+    </div>
+    <h1 th:text="'Benvenuto in Area Riservata ' + ${utente.profilo.username}"></h1>
+    <h4 th:if="${carrello == null}">Non hai un carrello</h4>
+    <table th:if="${carrello != null}">
+        <tr th:each="libro : ${carrello}">
+            <td th:text="${libro.titolo}"></td>
+            <td th:text="${libro.prezzo}"></td>
+            <td>
+                <a th:href="@{/riservatautente/rimuovi(id=${libro.id})}">Rimuovi da Carrello</a>
+            </td>
+        </tr>
+    </table>
+    <h5 th:if="${carrello != null}" th:text="'Totale Carrello ' + ${totale}"></h5>
+    <a th:if="${carrello != null}" th:href="@{/riservatautente/invia}">Invia Ordine</a>
+    <p th:if="${send != null}">Ordine Inviato!! Grazie</p>
+    <hr>
+    <form th:object="${utente}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{profilo.id}">
+        <input type="text" th:field="*{nome}" placeholder="nome" required>
+        <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></p>
+        <br>
+        <input type="text" th:field="*{cognome}" placeholder="cognome" required>
+        <p th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></p>
+        <br>
+        <input type="text" th:field="*{profilo.username}" placeholder="username" readonly>
+        <br>
+        <input type="text" th:field="*{profilo.password}" placeholder="password" required id="pwd">
+        <button type="button" onclick="mostra()">Mostra/Nascondi</button>
+        <p th:if="${#fields.hasErrors('profilo.password')}" th:errors="*{profilo.password}"></p>
+        <br>
+        <input type="submit" value="Modifica Dati">
+    </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var pwd = document.getElementById("pwd");
+            pwd.type = "password";
+        });
+        function mostra() {
+            if(pwd.type == "password")
+                pwd.type = "text";
+            else
+                pwd.type = "password";
+        }
+    </script>
+</body>
+</html>
